@@ -1,30 +1,32 @@
-provider "aws" {
-  access_key = "${var.aws_access_key}"
-  secret_key = "${var.aws_secret_key}"
-  region = "us-west-2"
-
-  default_tags {
-    tags = {
-      hashicorp-learn = "module-use"
-    }
-  }
+provider "google" {
+  credentials = file("../third-project-387904-cbd22e64b7b8.json")
+  project     = "third-project-387904"
+  region      = "us-central1"
 }
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "3.18.1"
+resource "google_compute_instance" "default" {
+  name         = "test"
+  machine_type = "e2-micro"
+  zone         = "us-central1-a"
 
-  name = var.vpc_name
-  cidr = var.vpc_cidr
+  tags = ["foo", "bar"]
 
-  azs             = var.vpc_azs
-  private_subnets = var.vpc_private_subnets
-  public_subnets  = var.vpc_public_subnets
-
-  enable_nat_gateway = var.vpc_enable_nat_gateway
+  boot_disk {
+    initialize_params {
+      image = "debian-cloud/debian-11"
+      labels = {
+        my_label = "value"
+      }
+    }
+  }
 
   
+  network_interface {
+    network = "default"
 
-  tags = var.vpc_tags
+    access_config {
+      // Ephemeral public IP
+    }
+  }
 }
 

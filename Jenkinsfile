@@ -1,14 +1,16 @@
 pipeline {
     agent any
 
-    environment {
-    SECRET_FILE_ID = credentials('thirdprojectsa')
-    }
+
     stages {
 
         stage('Secret File'){
+                environment {
+    SECRET_FILE_ID = credentials('thirdprojectsa')
+    }
             steps{
-                echo $SECRET_FILE_ID
+                	   echo "####DISPLAYING SECRET_FILE_ID####"
+	                   echo "Global property file: ${SECRET_FILE_ID}"
             }
         }
         

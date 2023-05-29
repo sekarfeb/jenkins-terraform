@@ -6,16 +6,15 @@ pipeline {
 
         stage('Secret File'){
                 environment {
-    SECRET_FILE_ID = credentials('thirdprojectsa')
-    }
-            steps{
-                	   echo "####DISPLAYING SECRET_FILE_ID####"
-	                   echo "Global property file: ${SECRET_FILE_ID}"
+                GCP_CREDS = credentials("${env.thirdprojectsa}")
+                
             }
         }
         
         stage('Terraform Init'){
             steps{
+
+                bat 'gcloud auth activate-service-account --key-file=${env.GCP_CREDS}'
                 bat 'terraform init'
             }
         }

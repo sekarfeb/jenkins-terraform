@@ -4,6 +4,14 @@ pipeline {
 
     stages {
 
+
+    stage('Gcloud command'){
+                steps {
+                bat 'gcloud auth list'
+                
+            }
+        }
+
         stage('Secret File'){
                 environment {
                 GCP_CREDS = credentials("${env.thirdprojectsa}")

@@ -9,7 +9,7 @@ pipeline {
         
         stage('Terraform init'){
             steps{
-                sh 'echo welcome'
+                bat 'terraform init'
             }
         }
 

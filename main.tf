@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("../third-project-387904-cbd22e64b7b8.json")
+  credentials = file("${SECRET_FILE_ID}")
   project     = "third-project-387904"
   region      = "us-central1"
 }

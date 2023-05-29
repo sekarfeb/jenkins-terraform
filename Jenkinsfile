@@ -7,7 +7,7 @@ pipeline {
 
        stage('Gcloud command'){
                 steps {
-                bat 'gcloud auth list'
+                gcloud auth list
                 
             }
         }

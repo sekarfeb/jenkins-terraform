@@ -5,13 +5,6 @@ pipeline {
     stages {
 
 
-       stage('Gcloud command'){
-                steps {
-                gcloud auth list
-                
-            }
-        }
-
         
         stage('Terraform Init'){
             steps{
